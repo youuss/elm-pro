@@ -1,0 +1,13 @@
+:root {
+  --elm-box-shadow: 0 2px 8px 0 rgba(25,25,27,0.08);
+  --background-white: #FFFFFF;
+  --elm-layout-padding: 16px;
+  --elm-layout-background: #f1f2f6;
+  --background-primary: #29CCCC;
+  --elm-border-radius: 4px;
+  --elm-normal-gap: 12px;
+}
+
+@import "layout/style/Layout.scss";
+@import "proForm/style/ProForm.scss";
+@import "proTable/style/ProTable.scss";
