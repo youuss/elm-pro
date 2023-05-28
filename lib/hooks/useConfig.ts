@@ -2,9 +2,38 @@ import {
   computed,
   onMounted, reactive, Ref, ref, UnwrapNestedRefs, ComputedRef, provide, toRaw,
 } from 'vue-demi';
-import {
-  Config, FormItem, Page, TableColumn,
-} from './types';
+import { TableColumn } from 'lib/proTable';
+import { FormItem, Layout } from '../proForm';
+import { PaginationProps } from '../pagination';
+
+type Fn<T = any> = (params: T) => T;
+
+export interface Pagination {
+  currentKey: string;
+  pageSizeKey: string;
+  totalKey: string;
+  layout?: string;
+  pageSizes?: number[];
+  isCustomTotal?: boolean;
+}
+
+export interface Config<Search = any, Row = any> {
+  table: {
+    beforeQuery: Fn<Search>;
+    query: Fn<Search>;
+    immediately: boolean;
+    columns: TableColumn<Row>[],
+    pagination: Pagination
+  },
+  search: {
+    formOption: {
+      model: Search,
+      [key: string]: unknown
+    }
+    layout?: Layout
+    formItems: FormItem[]
+  },
+}
 
 interface Cfn<S, R> {
   model: UnwrapNestedRefs<S>
@@ -13,7 +42,7 @@ interface Cfn<S, R> {
   tableData: Ref<R[]>
   columns: TableColumn<R>[]
   loading: Ref<Boolean>
-  pagination: ComputedRef<Page>
+  pagination: ComputedRef<PaginationProps>
   pageHandler: ({ current, pageSize }: { current: number, pageSize: number}) => void
 }
 

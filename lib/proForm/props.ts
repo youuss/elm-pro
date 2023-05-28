@@ -1,17 +1,17 @@
 import { PropType } from 'vue-demi';
-import { ProFormProps, FormItem } from './type';
+import { ProFormProps } from './type';
 
 export default {
   formOption: {
-    type: Object as PropType<Record<string, unknown>>,
+    type: Object as PropType<ProFormProps['formOption']>,
     default: () => ({}),
   },
   formItems: {
-    type: Array as PropType<FormItem[]>,
-    default: () => [] as PropType<FormItem[]>,
+    type: Array as PropType<ProFormProps['formItems']>,
+    default: () => [] as ProFormProps['formItems'],
   },
-  config: {
-    type: Object as PropType<ProFormProps['config']>,
+  layout: {
+    type: Object as PropType<ProFormProps['layout']>,
     default: () => ({
       labelWidth: '120px',
       lineCount: 4,

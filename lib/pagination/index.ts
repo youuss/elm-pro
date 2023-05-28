@@ -1,6 +1,6 @@
 import { withInstall, WithInstallType } from '../utils/withInstall';
 import _ElmPagination from './ElmPagination';
-import { PaginationProps } from './type'
+import { PaginationProps } from './type';
 
 export * from './type';
 export type ElmPaginationProps = PaginationProps;

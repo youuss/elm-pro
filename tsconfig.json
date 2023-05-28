@@ -35,8 +35,7 @@
     "lib/**/*.ts",
     "lib/**/*.d.ts",
     "lib/**/*.tsx",
-    "lib/**/*.vue",
-    "types/*.d.ts",
+    "lib/**/*.vue"
   ],
   "exclude": [
     "node_modules",

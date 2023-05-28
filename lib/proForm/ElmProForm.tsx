@@ -12,13 +12,13 @@ export default defineComponent({
   name: 'ElmProForm',
   props,
   setup(props, { slots }) {
-    const config = toRef(props, 'config');
+    const layout = toRef(props, 'layout');
     const formItems = toRef(props, 'formItems'); // todo 字段命名优化
     const formOption = toRef(props, 'formOption'); // todo 字段命名优化
 
     const { model, ...formProps } = formOption.value;
 
-    const { lineCount = 3, labelWidth, type = 'horizontal' } = config.value;
+    const { lineCount = 3, labelWidth, type = 'horizontal' } = layout.value;
 
     if (type === 'vertical') {
       return () => (

@@ -75,6 +75,7 @@ export default function itemRenderHelper(type: string, itemProps: Omit<FormItem,
 
       const watcherSet = new Set();
 
+      // 依赖收集初始化
       const initWatchers = async () => {
         for (let i = 0; i < dependsOn.length; i++) {
           if (watcherSet.has(dependsOn[i])) {
@@ -94,8 +95,8 @@ export default function itemRenderHelper(type: string, itemProps: Omit<FormItem,
           innerOptions.value = data || [];
         }
       };
-
-      // initWatchers();
+      // TODO 好像依赖收集有点问题，会进行多次的收集
+      initWatchers();
 
       const renderOptions = computed(() => innerOptions.value.map((opt) => h(ElOption, {
         ...opt,

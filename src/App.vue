@@ -11,7 +11,6 @@
       <ElmProTable :tableConfig="{
         data: tableData,
         columns,
-        border: true
       }" >
         <template #headerExtra>
           <el-button type="primary">新增</el-button>
@@ -30,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import useConfig from './useConfig';
+import useConfig from '../lib/hooks/useConfig';
 
 const {
   model, formItems, columns, tableData, pagination, queryTable, pageHandler,

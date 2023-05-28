@@ -9,6 +9,7 @@ function install(app: App, config?: Record<string, unknown>): void {
 }
 
 export * from './components';
+export * from './hooks/useConfig';
 
 export default {
   install,

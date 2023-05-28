@@ -1,13 +1,15 @@
 import type { FormItemProps } from 'element-plus';
 
-export interface Config {
+export interface Layout {
   lineCount?: number;
   labelWidth?: string | number
   type?: 'horizontal' | 'vertical';
 }
 
 export interface ProFormProps {
-  config: Config
+  layout: Layout
+  formOption?: Record<string, unknown>
+  formItems?: FormItem[],
 }
 
 export interface SelectOptions {
@@ -20,8 +22,8 @@ export interface SelectOptions {
 
 export interface FormItem extends Partial<FormItemProps> {
   type: string;
-  inputControl: {
+  inputControl?: {
     [key: string]: any
-  },
+  }
   options?: SelectOptions
 }
