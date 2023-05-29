@@ -9,7 +9,7 @@ export interface Layout {
 export interface ProFormProps {
   layout: Layout
   formOption?: Record<string, unknown>
-  formItems?: FormItem[],
+  formItems?: ConfigFormItem[],
 }
 
 export interface SelectOptions {
@@ -20,10 +20,15 @@ export interface SelectOptions {
   dependsOn?: string[];
 }
 
+export interface ConfigFormItem extends Partial<FormItemProps> {
+  type: string;
+  inputControl?: Record<string, any>
+  options?: SelectOptions
+}
+
+
 export interface FormItem extends Partial<FormItemProps> {
   type: string;
-  inputControl?: {
-    [key: string]: any
-  }
-  options?: SelectOptions
+  inputControl?: Record<string, any>
+  options?: any[]
 }

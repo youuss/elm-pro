@@ -4,7 +4,9 @@ import { ProFormProps } from './type';
 export default {
   formOption: {
     type: Object as PropType<ProFormProps['formOption']>,
-    default: () => ({}),
+    default: () => ({
+      model: {}
+    }),
   },
   formItems: {
     type: Array as PropType<ProFormProps['formItems']>,

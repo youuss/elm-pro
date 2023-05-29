@@ -1,22 +1,27 @@
 import {
-  defineComponent, toRef, computed,
-} from 'vue-demi';
+  defineComponent, toRef, computed, watch,
+} from 'vue-demi'
 import {
   ElForm, ElRow, ElCol,
 } from 'element-plus';
 import props from './props';
 import { FormItem } from './type';
 import itemRenderHelper from './itemRenderHelper';
+import useItems from './useItems'
 
 export default defineComponent({
   name: 'ElmProForm',
   props,
   setup(props, { slots }) {
     const layout = toRef(props, 'layout');
-    const formItems = toRef(props, 'formItems'); // todo 字段命名优化
+    const innerItems = toRef(props, 'formItems'); // todo 字段命名优化
     const formOption = toRef(props, 'formOption'); // todo 字段命名优化
 
     const { model, ...formProps } = formOption.value;
+
+    console.log('form render')
+
+    const formItems = useItems(innerItems.value, model)
 
     const { lineCount = 3, labelWidth, type = 'horizontal' } = layout.value;
 

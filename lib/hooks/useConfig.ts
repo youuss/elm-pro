@@ -1,9 +1,9 @@
 import {
   computed,
-  onMounted, reactive, Ref, ref, UnwrapNestedRefs, ComputedRef, provide, toRaw,
-} from 'vue-demi';
+  onMounted, reactive, Ref, ref, UnwrapNestedRefs, ComputedRef, provide, toRaw, watch,
+} from 'vue-demi'
 import { TableColumn } from 'lib/proTable';
-import { FormItem, Layout } from '../proForm';
+import { ConfigFormItem, Layout } from '../proForm';
 import { PaginationProps } from '../pagination';
 
 type Fn<T = any> = (params: T) => T;
@@ -31,13 +31,13 @@ export interface Config<Search = any, Row = any> {
       [key: string]: unknown
     }
     layout?: Layout
-    formItems: FormItem[]
+    formItems: ConfigFormItem[]
   },
 }
 
 interface Cfn<S, R> {
   model: UnwrapNestedRefs<S>
-  formItems: FormItem[]
+  formItems: ConfigFormItem[]
   queryTable: () => void
   tableData: Ref<R[]>
   columns: TableColumn<R>[]
