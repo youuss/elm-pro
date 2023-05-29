@@ -1,7 +1,7 @@
 import { computed, UnwrapNestedRefs, watch } from 'vue-demi';
 import { ref } from 'vue';
+import { debounce } from 'lodash-es';
 import { ConfigFormItem, FormItem } from './type';
-import useDebounceFn from '../hooks/useDebounceFn';
 
 export default function useItems(formItems: ConfigFormItem[], model: UnwrapNestedRefs<any>) {
   const disabledMap = ref(new Map());
@@ -10,18 +10,12 @@ export default function useItems(formItems: ConfigFormItem[], model: UnwrapNeste
     const { prop, inputControl = {}, options } = formItems[index];
 
     if (inputControl.disabled) {
-      watch(() => model, () => {
-        useDebounceFn(() => {
-          console.log('debounce~~~~');
-        }, 500);
+      watch(() => model, debounce(() => {
         disabledMap.value.set(prop, inputControl.disabled(model));
-      }, {
+      }, 500), {
         deep: true,
         immediate: true,
       });
-      watch(() => model, useDebounceFn(() => {
-        console.log('debounce~~~~');
-      }, 1000));
     }
     if (options) {
       const {
@@ -34,7 +28,7 @@ export default function useItems(formItems: ConfigFormItem[], model: UnwrapNeste
         })));
       }
       for (let i = 0; i < dependsOn.length; i++) {
-        watch(() => model[dependsOn[i]], async () => {
+        watch(() => model[dependsOn[i]], debounce(async () => {
           if (remote) {
             const data = await remote(model);
             optionsMap.value.set(prop, data.map((opt) => ({
@@ -42,7 +36,7 @@ export default function useItems(formItems: ConfigFormItem[], model: UnwrapNeste
               value: opt[optionValueKey || 'value'],
             })));
           }
-        });
+        }, 500));
       }
     }
   }

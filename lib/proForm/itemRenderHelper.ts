@@ -16,6 +16,9 @@ import { FormItem } from './type';
 
 const RENDER_TYPES = ['input', 'date', 'select', 'actions', 'slot'];
 
+const ACTIONS = 'actions';
+const SLOT = 'slot';
+
 export default function itemRenderHelper(type: string, itemProps: Omit<FormItem, 'type'>, model: UnwrapNestedRefs<any>, slots: Slots): VNode {
   if (!type) {
     return null;
@@ -27,10 +30,10 @@ export default function itemRenderHelper(type: string, itemProps: Omit<FormItem,
 
   const { prop, inputControl = { disabled: () => false }, ...props } = itemProps;
 
-  if (type === 'actions' || type === 'slot') {
+  if (type === ACTIONS || type === SLOT) {
     return h(ElFormItem, {
       prop,
-      class: type === 'actions' ? 'elm-pro-form__btn_group' : '',
+      class: type === ACTIONS ? 'elm-pro-form__btn_group' : '',
       ...props,
     }, {
       default: () => slots[prop as string] && slots[prop as string](),

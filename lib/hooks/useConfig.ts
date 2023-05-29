@@ -1,7 +1,7 @@
 import {
   computed,
-  onMounted, reactive, Ref, ref, UnwrapNestedRefs, ComputedRef, provide, toRaw, watch,
-} from 'vue-demi'
+  onMounted, reactive, Ref, ref, UnwrapNestedRefs, ComputedRef, provide, toRaw,
+} from 'vue-demi';
 import { TableColumn } from 'lib/proTable';
 import { ConfigFormItem, Layout } from '../proForm';
 import { PaginationProps } from '../pagination';
@@ -46,6 +46,13 @@ interface Cfn<S, R> {
   pageHandler: ({ current, pageSize }: { current: number, pageSize: number}) => void
 }
 
+const MODEL_KEY = 'model';
+const FORM_ITEMS_KEY = 'formItems';
+const TABLE_DATA_KEY = 'tableData';
+const COLUMNS_KEY = 'columns';
+const LOADING_KEY = 'loading';
+const PAGINATION_KEY = 'pagination';
+
 export default function useConfig<S extends Object, R = any>(config: Config): Cfn<S, R> {
   const { table, search } = config;
 
@@ -64,7 +71,7 @@ export default function useConfig<S extends Object, R = any>(config: Config): Cf
 
   const _pn = ref(1);
   const _ps = ref(10);
-  const _total = ref(100);
+  const _total = ref(0);
 
   const _pagination = computed(() => ({
     current: _pn.value,
@@ -89,7 +96,8 @@ export default function useConfig<S extends Object, R = any>(config: Config): Cf
     });
     if (list) {
       tableData.value = list;
-      _total.value = isCustomTotal ? list.length : total || 0;
+      const t = list.length < _ps.value ? pn * _ps.value : (pn + 1) * _ps.value;
+      _total.value = isCustomTotal ? t : total || 0;
     }
     loading.value = false;
   };
@@ -105,12 +113,12 @@ export default function useConfig<S extends Object, R = any>(config: Config): Cf
   });
 
   const initProvide = () => {
-    provide('mode', model);
-    provide('formItems', formItems);
-    provide('tableData', tableData);
-    provide('columns', columns);
-    provide('loading', loading);
-    provide('pagination', _pagination);
+    provide(MODEL_KEY, model);
+    provide(FORM_ITEMS_KEY, formItems);
+    provide(TABLE_DATA_KEY, tableData);
+    provide(COLUMNS_KEY, columns);
+    provide(LOADING_KEY, loading);
+    provide(PAGINATION_KEY, _pagination);
   };
 
   initProvide();
