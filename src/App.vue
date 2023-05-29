@@ -1,37 +1,31 @@
 <template>
-<!--  <ElmLayout>-->
-<!--    <template #header>-->
-<!--      <ElmProForm :formOption="{model}" :formItems="formItems">-->
-<!--        <template #btn>-->
-<!--          <el-button @click="query" type="primary">查询</el-button>-->
-<!--        </template>-->
-<!--      </ElmProForm>-->
-<!--    </template>-->
-<!--    <template #container>-->
-<!--      <ElmProTable :tableConfig="{-->
-<!--        data: tableData,-->
-<!--        columns,-->
-<!--      }" >-->
-<!--        <template #headerExtra>-->
-<!--          <el-button type="primary">新增</el-button>-->
-<!--          <el-button>导出</el-button>-->
-<!--        </template>-->
-<!--        <template #btn>-->
-<!--          <div>-->
-<!--            <el-button text>查看</el-button>-->
-<!--            <el-button text type="danger">删除</el-button>-->
-<!--          </div>-->
-<!--        </template>-->
-<!--      </ElmProTable>-->
-<!--      <ElmPagination :current="pagination.current" :total="pagination.total" @change="pageHandler"/>-->
-<!--    </template>-->
-<!--  </ElmLayout>-->
-  <ElmProForm :formOption="{model}" :formItems="formItems">
-    <template #btn>
-      <el-button @click="queryTable()" type="primary">查询</el-button>
+  <ElmLayout>
+    <template #header>
+      <ElmProForm :formOption="{model}" :formItems="formItems">
+        <template #btn>
+          <el-button @click="queryTable()" type="primary">查询</el-button>
+        </template>
+      </ElmProForm>
     </template>
-  </ElmProForm>
-<!--  <ElmPagination :current="pagination.current" :total="pagination.total" @change="pageHandler"/>-->
+    <template #container>
+      <ElmProTable :tableConfig="{
+        data: tableData,
+        columns,
+      }" >
+        <template #headerExtra>
+          <el-button type="primary">新增</el-button>
+          <el-button>导出</el-button>
+        </template>
+        <template #btn>
+          <div>
+            <el-button text>查看</el-button>
+            <el-button text type="danger">删除</el-button>
+          </div>
+        </template>
+      </ElmProTable>
+      <ElmPagination :current="pagination.current" :total="pagination.total" @change="pageHandler"/>
+    </template>
+  </ElmLayout>
 </template>
 
 <script setup lang="ts">

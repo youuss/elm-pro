@@ -1,13 +1,13 @@
 import {
-  defineComponent, toRef, computed, watch,
-} from 'vue-demi'
+  defineComponent, toRef, computed,
+} from 'vue-demi';
 import {
   ElForm, ElRow, ElCol,
 } from 'element-plus';
 import props from './props';
 import { FormItem } from './type';
 import itemRenderHelper from './itemRenderHelper';
-import useItems from './useItems'
+import useItems from './useItems';
 
 export default defineComponent({
   name: 'ElmProForm',
@@ -19,9 +19,8 @@ export default defineComponent({
 
     const { model, ...formProps } = formOption.value;
 
-    console.log('form render')
-
-    const formItems = useItems(innerItems.value, model)
+    console.log('form render');
+    const formItems = useItems(innerItems.value, model);
 
     const { lineCount = 3, labelWidth, type = 'horizontal' } = layout.value;
 
